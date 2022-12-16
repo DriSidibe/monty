@@ -1,61 +1,48 @@
 #include <stdlib.h>
 #include <stdio.h>
-#include "monty.h"
-#include "functions.h"
+#include <string.h>
+#include <unistd.h>
 
+#include "../includes/test_args.h"
+#include "../includes/alx_given_structures.h"
+#include "../includes/monty.h"
+#include "../includes/functions.h"
+
+int nbr_opcode = 3;
+
+/*
+ * main - the main function of the programm
+ * @argc: the number of argument
+ * @argv: the list of arguments
+ * Return: 0 if all right
+ */
 int main(int argc, char *argv[])
 {
 	FILE *file = NULL;
-	stack_t *stack = NULL;
-	instruction_t *instruction = NULL;
-	char *instr;
-	char *str;
-	char *opcode;
-	int line_number = 0;
-	int instruction_max_size = 64;
+	char *instruction = NULL;
+	int line_number = 1;
+	char *opcode = NULL;
+	char *operand = NULL;
 
-	instruction = malloc(sizeof(instruction_t));
-	if (instruction == NULL)
-		return (EXIT_FAILURE);
+	verify_args(argc, argv);
 
 	file = fopen(argv[1], "r");
-	if (argc > 2)
-	{
-		fprintf(stderr, "%s", "USAGE: monty file\n");
-		free(instr);
-		free(instruction);
-		return (EXIT_FAILURE);
-	}
+	instruction = malloc(sizeof(char) * instruction_max_size);
+	if (instruction == NULL)
+		error("Error: malloc failed", "");
 
-	if (file == NULL)
-	{
-		printf("Error: Can't open file %d", argv[1]);
-		return (EXIT_FAILURE);
-	}
-
-	instr = malloc(sizeof(char) * instruction_max_size);
-	str = malloc(sizeof(char) * instruction_max_size);
 	opcode = malloc(sizeof(char) * instruction_max_size);
-	if (intr == NULL || str == NULL || opcode == NULL)
-	{
-		printf("Error: malloc failed\n");
-		return (EXIT_FAILURE);
-	}
+	operand = malloc(sizeof(char) * instruction_max_size);
+	if (opcode == NULL || operand == NULL)
+		error("Error: malloc failed", "");
 
-	while (fgets(instr, instruction_max_size, file) != NULL)
+
+	while (fgets(instruction, instruction_max_size, file) != NULL)
 	{
-		opcode = _get_first_word(instr, str, ' ', 0));
-		if (opcode == "push")
-			stack = push(&stack, line_number);
-		else if (opcode == "pall")
-			pall(&stack, line_number);
+		opcode = verify_instruction(instruction, line_number);
+		operand = get_operand(instruction, strlen(opcode));
 		line_number++;
 	}
-
-	free(instr);
-	free(instruction);
-	free(opcode)
-	free(str);
 
 	return (EXIT_SUCCESS);
 }
