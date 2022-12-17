@@ -23,6 +23,7 @@ int main(int argc, char *argv[])
 	int line_number = 1;
 	char *opcode = NULL;
 	char *operand = NULL;
+	stack_t *stack = NULL;
 
 	verify_args(argc, argv);
 
@@ -33,7 +34,8 @@ int main(int argc, char *argv[])
 
 	opcode = malloc(sizeof(char) * instruction_max_size);
 	operand = malloc(sizeof(char) * instruction_max_size);
-	if (opcode == NULL || operand == NULL)
+	stack = malloc(sizeof(stack_t));
+	if (opcode == NULL || operand == NULL || stack == NULL)
 		error("Error: malloc failed", "");
 
 
@@ -41,6 +43,7 @@ int main(int argc, char *argv[])
 	{
 		opcode = verify_instruction(instruction, line_number);
 		operand = get_operand(instruction, strlen(opcode));
+		stack = execute_instruction(stack, opcode, atoi(operand));
 		line_number++;
 	}
 

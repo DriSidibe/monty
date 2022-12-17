@@ -5,6 +5,9 @@
 #include "../includes/functions.h"
 #include "../includes/monty.h"
 #include "../includes/test_args.h"
+#include "../includes/alx_given_structures.h"
+#include "../includes/opcode_handdler.h"
+
 
 /**
  * _get_first_word - get the first word of a string
@@ -101,12 +104,12 @@ char *get_operand(char *s, int op_len)
 	return (res);
 }
 
-int execute_instruction(char opcode, int param)
+stack_t *execute_instruction(stack_t *stack, char *opcode, int param)
 {
 	if (strcmp(opcode, "push") == 0)
-	{
-		push(stack, param);
-	}
+		stack = push(&stack, param);
+	else if (strcmp(opcode, "pall") == 0)
+		pall(&stack);
 
-	return (0);
+	return (stack);
 }
