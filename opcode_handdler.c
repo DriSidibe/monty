@@ -108,3 +108,69 @@ void pop(stack_t **stack, int line_number)
 	}
 	free(tmp_node);
 }
+
+/**
+ * swap - removes the top element of the stack.
+ * @stack: the stack
+ * @line_number: the current line number
+ */
+void swap(stack_t **stack, int line_number)
+{
+	stack_t *cursor = *stack;
+	stack_t *head1 = *stack;
+	stack_t *head2 = head1->next;
+	int len = 0;
+
+	while (cursor != NULL)
+	{
+		len++;
+		cursor = cursor->next;
+		if (len == 2)
+			break;
+	}
+
+	if (len < 2)
+	{
+		printf("L%d: can't swap, stack too short", line_number);
+		exit(EXIT_FAILURE);
+	}
+
+	head1->next = head2->next;
+	head1->prev = head2;
+	head2->prev = NULL;
+	head2->next = head1;
+
+	*stack = head2;
+}
+
+/**
+ * add - removes the top element of the stack.
+ * @stack: the stack
+ * @line_number: the current line number
+ */
+void add(stack_t **stack, int line_number)
+{
+	stack_t *cursor = *stack;
+	stack_t *head1 = *stack;
+	stack_t *head2 = head1->next;
+	int len = 0;
+
+	while (cursor != NULL)
+	{
+		len++;
+		cursor = cursor->next;
+		if (len == 2)
+			break;
+	}
+
+	if (len < 2)
+	{
+		printf("L%d: can't add, stack too short", line_number);
+		exit(EXIT_FAILURE);
+	}
+
+	head2->n = head2->n + head1->n;
+	head2->prev = NULL;
+	free(head1);
+	(*stack) = head2;
+}
