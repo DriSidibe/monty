@@ -131,7 +131,7 @@ int is_param_valid(char *param)
 }
 
 /**
- * execute_instruction - execute the instruction
+ * exe_inst - execute the instruction
  * @stack: monty stack
  * @opcode: the opcode
  * @param: the parameter
