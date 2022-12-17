@@ -160,6 +160,8 @@ stack_t *execute_instruction(stack_t *stack, char *opcode, char *param, int line
 	}
 	else if (strcmp(opcode, "pall") == 0)
 		pall(&stack);
+	else if (strcmp(opcode, "pint") == 0)
+		pint(&stack, line_number);
 
 	return (stack);
 }

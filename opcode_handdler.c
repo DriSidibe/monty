@@ -50,3 +50,25 @@ void pall(stack_t **stack)
 		(*stack) = (*stack)->next;
 	}
 }
+
+/**
+ * pint - prints all the elements at the top of the stack.
+ * @stack: the stack.
+ * @line_number: the line number
+ */
+void pint(stack_t **stack, int line_number)
+{
+	if (*stack == NULL)
+	{
+		printf("L%d: can't pint, stack empty", line_number);
+		exit(EXIT_FAILURE);
+	}
+	else
+	{
+		while (*stack != NULL)
+		{
+			printf("%d\n", (*stack)->n);
+			(*stack) = (*stack)->next;
+		}
+	}
+}

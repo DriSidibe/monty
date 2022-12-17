@@ -5,5 +5,6 @@
 
 stack_t *push(stack_t **stack, int i);
 void pall(stack_t **stack);
+void pint(stack_t **stack, int line_number);
 
 #endif
