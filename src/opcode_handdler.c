@@ -7,7 +7,9 @@
 /**
  * push - pushes an element to the stack.
  * @stack: the stack
- * @line_number: the number to push.
+ * @i: the parameter
+ *
+ * Return: the stack
  */
 stack_t *push(stack_t **stack, int i)
 {
@@ -39,6 +41,8 @@ stack_t *push(stack_t **stack, int i)
 /**
  * pall - prints all the elements of the stack.
  * @stack: the stack.
+ *
+ * Return: nothing
  */
 void *pall(stack_t **stack)
 {

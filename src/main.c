@@ -10,10 +10,11 @@
 
 int nbr_opcode = 3;
 
-/*
+/**
  * main - the main function of the programm
  * @argc: the number of argument
  * @argv: the list of arguments
+ *
  * Return: 0 if all right
  */
 int main(int argc, char *argv[])
@@ -34,8 +35,7 @@ int main(int argc, char *argv[])
 
 	opcode = malloc(sizeof(char) * instruction_max_size);
 	operand = malloc(sizeof(char) * instruction_max_size);
-	stack = malloc(sizeof(stack_t));
-	if (opcode == NULL || operand == NULL || stack == NULL)
+	if (opcode == NULL || operand == NULL)
 		error("Error: malloc failed", "");
 
 

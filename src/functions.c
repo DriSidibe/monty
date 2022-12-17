@@ -13,6 +13,7 @@
  * _get_first_word - get the first word of a string
  * @s: the string
  * @str: ...
+ * @d: the delimiter
  * @j: the cursor
  *
  * Return: a pointer to the word
@@ -41,7 +42,7 @@ char *_get_first_word(char *s, char *str, char d, int j)
 /**
  * _remove_spaces - remove space before
  * @s: the string
- * @src: storage
+ * @str: storage
  *
  * Return: the result
  */
@@ -64,6 +65,12 @@ char *_remove_spaces(char *s, char *str)
 	return (str);
 }
 
+/**
+ * is_in_op_list - verify if it's an op_code
+ * @s: the opcode
+ *
+ * Return: 0 if true
+ */
 int is_in_op_list(char *s)
 {
 	int i = 0;
@@ -81,6 +88,13 @@ int is_in_op_list(char *s)
 	return (1);
 }
 
+/**
+ * get_operand - get the operands
+ * @s: the instruction
+ * @op_len: opcode len
+ *
+ * Return: the result
+ */
 char *get_operand(char *s, int op_len)
 {
 	char *res = NULL;
@@ -104,6 +118,14 @@ char *get_operand(char *s, int op_len)
 	return (res);
 }
 
+/**
+ * execute_instruction - execute the instruction
+ * @stack: monty stack
+ * @opcode: the opcode
+ * @param: the parameter
+ *
+ * Return: the stack
+ */
 stack_t *execute_instruction(stack_t *stack, char *opcode, int param)
 {
 	if (strcmp(opcode, "push") == 0)
