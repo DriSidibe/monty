@@ -44,11 +44,14 @@ stack_t *push(stack_t **stack, int i)
  */
 void pall(stack_t **stack)
 {
+	stack_t *head = *stack;
+
 	while (*stack != NULL)
 	{
 		printf("%d\n", (*stack)->n);
 		(*stack) = (*stack)->next;
 	}
+	*stack = head;
 }
 
 /**
@@ -64,11 +67,44 @@ void pint(stack_t **stack, int line_number)
 		exit(EXIT_FAILURE);
 	}
 	else
+		printf("%d\n", (*stack)->n);
+}
+
+/**
+ * pop - removes the top element of the stack.
+ * @stack: the stack
+ * @line_number: the current line number
+ */
+void pop(stack_t **stack, int line_number)
+{
+	stack_t *tmp_node;
+	int index = 0;
+
+	tmp_node = *stack;
+	if (*stack == NULL)
 	{
-		while (*stack != NULL)
-		{
-			printf("%d\n", (*stack)->n);
-			(*stack) = (*stack)->next;
-		}
+		printf("L%d: can't pop an empty stack", line_number);
+		exit(EXIT_FAILURE);
 	}
+	while (index != 0)
+	{
+		if (tmp_node == NULL)
+			exit(-1);
+		tmp_node = tmp_node->next;
+		index--;
+	}
+
+	if (tmp_node == *stack)
+	{
+		*stack = tmp_node->next;
+		if (*stack != NULL)
+			(*stack)->prev = NULL;
+	}
+	else
+	{
+		tmp_node->prev->next = tmp_node->next;
+		if (tmp_node->next != NULL)
+			tmp_node->next->prev = tmp_node->prev;
+	}
+	free(tmp_node);
 }

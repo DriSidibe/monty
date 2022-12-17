@@ -8,7 +8,7 @@
 #include "monty.h"
 #include "functions.h"
 
-int nbr_opcode = 3;
+int nbr_opcode = 4;
 
 /**
  * main - the main function of the programm

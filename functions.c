@@ -83,8 +83,6 @@ int is_in_op_list(char *s)
 				return (0);
 		}
 	}
-	else
-		return (0);
 	return (1);
 }
 
@@ -162,6 +160,8 @@ stack_t *execute_instruction(stack_t *stack, char *opcode, char *param, int line
 		pall(&stack);
 	else if (strcmp(opcode, "pint") == 0)
 		pint(&stack, line_number);
+	else if (strcmp(opcode, "pop") == 0)
+		pop(&stack, line_number);
 
 	return (stack);
 }
