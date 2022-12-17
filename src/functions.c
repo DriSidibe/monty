@@ -119,17 +119,45 @@ char *get_operand(char *s, int op_len)
 }
 
 /**
+ * is_param_valid - test parameter
+ * @param: the param
+ *
+ * Return: 0 if true
+ */
+int is_param_valid(char *param)
+{
+	if (strcmp(param, "") == 0)
+		return (0);
+
+	return (1);
+}
+
+/**
  * execute_instruction - execute the instruction
  * @stack: monty stack
  * @opcode: the opcode
  * @param: the parameter
+ * @line_number: line number
  *
  * Return: the stack
  */
-stack_t *execute_instruction(stack_t *stack, char *opcode, int param)
+stack_t *execute_instruction(stack_t *stack, char *opcode, char *param, int line_number)
 {
+	int operand;
+
 	if (strcmp(opcode, "push") == 0)
-		stack = push(&stack, param);
+	{
+		if (is_param_valid(param) == 0)
+		{
+			operand = atoi(param);
+			stack = push(&stack, operand);
+		}
+		else
+		{
+			printf("L%d: usage: push integer", line_number);
+			exit(1);
+		}
+	}
 	else if (strcmp(opcode, "pall") == 0)
 		pall(&stack);
 
