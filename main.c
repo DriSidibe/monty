@@ -1,51 +1,47 @@
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
-#include <unistd.h>
-
-#include "test_args.h"
-#include "alx_given_structures.h"
 #include "monty.h"
-#include "functions.h"
 
-int nbr_opcode = 7;
+/* global struct to hold flag for queue and stack length */
+var_t var;
 
 /**
- * main - the main function of the programm
- * @argc: the number of argument
- * @argv: the list of arguments
+ * main - Monty bytecode interpreter
+ * @argc: number of arguments passed
+ * @argv: array of argument strings
  *
- * Return: 0 if all right
+ * Return: EXIT_SUCCESS on success or EXIT_FAILURE on failure
  */
 int main(int argc, char *argv[])
 {
-	FILE *file = NULL;
-	char *instruction = NULL;
-	int line_number = 1;
-	char *opcode = NULL;
-	char *operand = NULL;
 	stack_t *stack = NULL;
+	unsigned int line_number = 0;
+	FILE *fs = NULL;
+	char *lineptr = NULL, *op = NULL;
+	size_t n = 0;
 
-	verify_args(argc, argv);
-
-	file = fopen(argv[1], "r");
-	instruction = malloc(sizeof(char) * instruction_max_size);
-	if (instruction == NULL)
-		error("Error: malloc failed", "");
-
-	opcode = malloc(sizeof(char) * instruction_max_size);
-	operand = malloc(sizeof(char) * instruction_max_size);
-	if (opcode == NULL || operand == NULL)
-		error("Error: malloc failed", "");
-
-
-	while (fgets(instruction, instruction_max_size, file) != NULL)
+	var.queue = 0;
+	var.stack_len = 0;
+	if (argc != 2)
 	{
-		opcode = verify_instruction(instruction, line_number);
-		operand = get_operand(instruction, strlen(opcode));
-		stack = exe_inst(stack, opcode, operand, line_number);
-		line_number++;
+		dprintf(STDOUT_FILENO, "USAGE: monty file\n");
+		exit(EXIT_FAILURE);
 	}
-
-	return (EXIT_SUCCESS);
+	fs = fopen(argv[1], "r");
+	if (fs == NULL)
+	{
+		dprintf(STDOUT_FILENO, "Error: Can't open file %s\n", argv[1]);
+		exit(EXIT_FAILURE);
+	}
+	on_exit(free_lineptr, &lineptr);
+	on_exit(free_stack, &stack);
+	on_exit(m_fs_close, fs);
+	while (getline(&lineptr, &n, fs) != -1)
+	{
+		line_number++;
+		op = strtok(lineptr, "\n\t\r ");
+		if (op != NULL && op[0] != '#')
+		{
+			get_op(op, &stack, line_number);
+		}
+	}
+	exit(EXIT_SUCCESS);
 }
