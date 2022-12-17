@@ -5,7 +5,7 @@
 #include "monty.h"
 #include "functions.h"
 
-char valid_opcodes[][255] = {"push", "pall"};
+char valid_opcodes[][255] = {"push", "pall", "pint"};
 int instruction_max_size = 64;
 
 /**

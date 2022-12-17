@@ -127,9 +127,9 @@ char *get_operand(char *s, int op_len)
 int is_param_valid(char *param)
 {
 	if (strcmp(param, "") == 0)
-		return (0);
+		return (1);
 
-	return (1);
+	return (0);
 }
 
 /**
