@@ -41,10 +41,8 @@ stack_t *push(stack_t **stack, int i)
 /**
  * pall - prints all the elements of the stack.
  * @stack: the stack.
- *
- * Return: nothing
  */
-void *pall(stack_t **stack)
+void pall(stack_t **stack)
 {
 	while (*stack != NULL)
 	{

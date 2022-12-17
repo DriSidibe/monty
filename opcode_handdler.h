@@ -4,6 +4,6 @@
 #include "alx_given_structures.h"
 
 stack_t *push(stack_t **stack, int i);
-void *pall(stack_t **stack);
+void pall(stack_t **stack);
 
 #endif

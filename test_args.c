@@ -58,10 +58,6 @@ char *verify_instruction(char *instruction, int line_number)
  */
 int verify_args(int argc, char *argv[])
 {
-	FILE *file = NULL;
-	char *instruction = NULL;
-	int line_number = 1;
-
 	if (argc != 2)
 		error("USAGE: monty file", "");
 
