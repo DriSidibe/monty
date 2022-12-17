@@ -139,7 +139,7 @@ int is_param_valid(char *param)
  *
  * Return: the stack
  */
-stack_t *execute_instruction(stack_t *stack, char *opcode, char *param, int line_number)
+stack_t *exe_inst(stack_t *stack, char *opcode, char *param, int line_number)
 {
 	int operand;
 
