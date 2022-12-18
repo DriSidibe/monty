@@ -3,12 +3,12 @@
 #include <string.h>
 #include <unistd.h>
 
-#include "test_args.h"
-#include "alx_given_structures.h"
-#include "monty.h"
-#include "functions.h"
+#include "../includes/test_args.h"
+#include "../includes/alx_given_structures.h"
+#include "../includes/monty.h"
+#include "../includes/functions.h"
 
-int nbr_opcode = 7;
+int nbr_opcode = 3;
 
 /**
  * main - the main function of the programm
@@ -43,7 +43,7 @@ int main(int argc, char *argv[])
 	{
 		opcode = verify_instruction(instruction, line_number);
 		operand = get_operand(instruction, strlen(opcode));
-		stack = exe_inst(stack, opcode, operand, line_number);
+		stack = execute_instruction(stack, opcode, operand, line_number);
 		line_number++;
 	}
 
